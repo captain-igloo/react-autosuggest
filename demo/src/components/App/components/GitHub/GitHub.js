@@ -1,9 +1,9 @@
-import styles from './GitHub.less';
+import * as styles from './GitHub.less';
 
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const GitHub = props => {
+const GitHub = (props) => {
   const { user, repo } = props;
 
   return (
@@ -31,7 +31,7 @@ const GitHub = props => {
 
 GitHub.propTypes = {
   user: PropTypes.string.isRequired,
-  repo: PropTypes.string.isRequired
+  repo: PropTypes.string.isRequired,
 };
 
 export default GitHub;

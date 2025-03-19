@@ -1,4 +1,4 @@
-import styles from './Features.less';
+import * as styles from './Features.less';
 
 import React from 'react';
 import Link from 'Link/Link';

@@ -1,4 +1,4 @@
-import styles from './Footer.less';
+import * as styles from './Footer.less';
 
 import React from 'react';
 import Link from 'Link/Link';

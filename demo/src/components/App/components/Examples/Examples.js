@@ -1,4 +1,4 @@
-import styles from './Examples.less';
+import * as styles from './Examples.less';
 
 import React from 'react';
 import Basic from 'Basic/Basic';

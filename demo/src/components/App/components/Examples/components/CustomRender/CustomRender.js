@@ -1,5 +1,5 @@
-import styles from './CustomRender.less';
-import theme from './theme.less';
+import * as styles from './CustomRender.less';
+import * as theme from './theme.less';
 
 import React, { Component } from 'react';
 import isMobile from 'ismobilejs';
@@ -12,7 +12,7 @@ import { escapeRegexCharacters } from 'utils/utils';
 
 const focusInputOnSuggestionClick = !isMobile.any;
 
-const getSuggestions = value => {
+const getSuggestions = (value) => {
   const escapedValue = escapeRegexCharacters(value.trim());
 
   if (escapedValue === '') {
@@ -21,10 +21,10 @@ const getSuggestions = value => {
 
   const regex = new RegExp('\\b' + escapedValue, 'i');
 
-  return people.filter(person => regex.test(getSuggestionValue(person)));
+  return people.filter((person) => regex.test(getSuggestionValue(person)));
 };
 
-const getSuggestionValue = suggestion =>
+const getSuggestionValue = (suggestion) =>
   `${suggestion.first} ${suggestion.last}`;
 
 const renderSuggestion = (suggestion, { query }) => {
@@ -55,13 +55,13 @@ export default class CustomRender extends Component {
 
     this.state = {
       value: '',
-      suggestions: []
+      suggestions: [],
     };
   }
 
   onChange = (event, { newValue }) => {
     this.setState({
-      value: newValue
+      value: newValue,
     });
   };
 
@@ -69,7 +69,7 @@ export default class CustomRender extends Component {
     setTimeout(() => {
       if (value === this.state.value) {
         this.setState({
-          suggestions: getSuggestions(value)
+          suggestions: getSuggestions(value),
         });
       }
     }, 200);
@@ -77,7 +77,7 @@ export default class CustomRender extends Component {
 
   onSuggestionsClearRequested = () => {
     this.setState({
-      suggestions: []
+      suggestions: [],
     });
   };
 
@@ -86,7 +86,7 @@ export default class CustomRender extends Component {
     const inputProps = {
       placeholder: "Type 'c'",
       value,
-      onChange: this.onChange
+      onChange: this.onChange,
     };
 
     return (

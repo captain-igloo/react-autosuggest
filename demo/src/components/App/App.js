@@ -1,4 +1,4 @@
-import styles from './App.less';
+import * as styles from './App.less';
 
 import React from 'react';
 import Header from 'Header/Header';

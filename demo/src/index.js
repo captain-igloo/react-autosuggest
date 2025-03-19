@@ -1,8 +1,9 @@
-import es6promise from 'es6-promise';
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from 'App/App';
 
-es6promise.polyfill(); // Required, because `Promise` is undefined in IE.
+const container = document.getElementById('demo');
 
-render(<App />, document.getElementById('demo'));
+if (container) {
+  createRoot(container).render(<App />);
+}

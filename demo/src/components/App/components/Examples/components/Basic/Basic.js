@@ -1,4 +1,4 @@
-import styles from './Basic.less';
+import * as styles from './Basic.less';
 
 import React, { Component } from 'react';
 import isMobile from 'ismobilejs';
@@ -9,7 +9,7 @@ import { escapeRegexCharacters } from 'utils/utils';
 
 const focusInputOnSuggestionClick = !isMobile.any;
 
-const getSuggestions = value => {
+const getSuggestions = (value) => {
   const escapedValue = escapeRegexCharacters(value.trim());
 
   if (escapedValue === '') {
@@ -18,12 +18,12 @@ const getSuggestions = value => {
 
   const regex = new RegExp('^' + escapedValue, 'i');
 
-  return languages.filter(language => regex.test(language.name));
+  return languages.filter((language) => regex.test(language.name));
 };
 
-const getSuggestionValue = suggestion => suggestion.name;
+const getSuggestionValue = (suggestion) => suggestion.name;
 
-const renderSuggestion = suggestion => <span>{suggestion.name}</span>;
+const renderSuggestion = (suggestion) => <span>{suggestion.name}</span>;
 
 export default class Basic extends Component {
   constructor() {
@@ -31,25 +31,25 @@ export default class Basic extends Component {
 
     this.state = {
       value: '',
-      suggestions: []
+      suggestions: [],
     };
   }
 
   onChange = (event, { newValue }) => {
     this.setState({
-      value: newValue
+      value: newValue,
     });
   };
 
   onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
-      suggestions: getSuggestions(value)
+      suggestions: getSuggestions(value),
     });
   };
 
   onSuggestionsClearRequested = () => {
     this.setState({
-      suggestions: []
+      suggestions: [],
     });
   };
 
@@ -58,7 +58,7 @@ export default class Basic extends Component {
     const inputProps = {
       placeholder: "Type 'c'",
       value,
-      onChange: this.onChange
+      onChange: this.onChange,
     };
 
     return (

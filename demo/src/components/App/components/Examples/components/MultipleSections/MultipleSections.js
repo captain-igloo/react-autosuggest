@@ -1,5 +1,5 @@
-import styles from './MultipleSections.less';
-import theme from './theme.less';
+import * as styles from './MultipleSections.less';
+import * as theme from './theme.less';
 
 import React, { Component } from 'react';
 import isMobile from 'ismobilejs';
@@ -10,7 +10,7 @@ import { escapeRegexCharacters } from 'utils/utils';
 
 const focusInputOnSuggestionClick = !isMobile.any;
 
-const getSuggestions = value => {
+const getSuggestions = (value) => {
   const escapedValue = escapeRegexCharacters(value.trim());
 
   if (escapedValue === '') {
@@ -20,24 +20,24 @@ const getSuggestions = value => {
   const regex = new RegExp('^' + escapedValue, 'i');
 
   return languages
-    .map(section => {
+    .map((section) => {
       return {
         title: section.title,
-        languages: section.languages.filter(language =>
-          regex.test(language.name)
-        )
+        languages: section.languages.filter((language) =>
+          regex.test(language.name),
+        ),
       };
     })
-    .filter(section => section.languages.length > 0);
+    .filter((section) => section.languages.length > 0);
 };
 
-const getSuggestionValue = suggestion => suggestion.name;
+const getSuggestionValue = (suggestion) => suggestion.name;
 
-const renderSuggestion = suggestion => <span>{suggestion.name}</span>;
+const renderSuggestion = (suggestion) => <span>{suggestion.name}</span>;
 
-const renderSectionTitle = section => <strong>{section.title}</strong>;
+const renderSectionTitle = (section) => <strong>{section.title}</strong>;
 
-const getSectionSuggestions = section => section.languages;
+const getSectionSuggestions = (section) => section.languages;
 
 export default class MultipleSections extends Component {
   constructor() {
@@ -45,25 +45,25 @@ export default class MultipleSections extends Component {
 
     this.state = {
       value: '',
-      suggestions: []
+      suggestions: [],
     };
   }
 
   onChange = (event, { newValue }) => {
     this.setState({
-      value: newValue
+      value: newValue,
     });
   };
 
   onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
-      suggestions: getSuggestions(value)
+      suggestions: getSuggestions(value),
     });
   };
 
   onSuggestionsClearRequested = () => {
     this.setState({
-      suggestions: []
+      suggestions: [],
     });
   };
 
@@ -72,7 +72,7 @@ export default class MultipleSections extends Component {
     const inputProps = {
       placeholder: "Type 'c'",
       value,
-      onChange: this.onChange
+      onChange: this.onChange,
     };
 
     return (

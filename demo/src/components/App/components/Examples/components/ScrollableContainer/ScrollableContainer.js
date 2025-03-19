@@ -1,5 +1,5 @@
-import styles from './ScrollableContainer.less';
-import theme from './theme.less';
+import * as styles from './ScrollableContainer.less';
+import * as theme from './theme.less';
 
 import React, { Component } from 'react';
 import Modal from 'react-modal';
@@ -7,7 +7,7 @@ import Autosuggest from 'Autosuggest';
 import countries from './countries';
 import { escapeRegexCharacters } from 'utils/utils';
 
-const getSuggestions = value => {
+const getSuggestions = (value) => {
   const escapedValue = escapeRegexCharacters(value.trim());
 
   if (escapedValue === '') {
@@ -16,12 +16,12 @@ const getSuggestions = value => {
 
   const regex = new RegExp('^' + escapedValue, 'i');
 
-  return countries.filter(country => regex.test(country.name));
+  return countries.filter((country) => regex.test(country.name));
 };
 
-const getSuggestionValue = suggestion => suggestion.name;
+const getSuggestionValue = (suggestion) => suggestion.name;
 
-const renderSuggestion = suggestion => suggestion.name;
+const renderSuggestion = (suggestion) => suggestion.name;
 
 const modalStyle = {
   overlay: {
@@ -31,7 +31,7 @@ const modalStyle = {
     right: 0,
     bottom: 0,
     backgroundColor: '#fff',
-    fontFamily: '"Open Sans", sans-serif'
+    fontFamily: '"Open Sans", sans-serif',
   },
   content: {
     position: 'absolute',
@@ -43,8 +43,8 @@ const modalStyle = {
     padding: 0,
     overflow: 'hidden',
     outline: 'none',
-    height: '100%'
-  }
+    height: '100%',
+  },
 };
 
 export default class ScrollableContainer extends Component {
@@ -53,9 +53,9 @@ export default class ScrollableContainer extends Component {
 
     this.state = {
       isModalOpen: false,
-      selected: countries.filter(country => country.name === 'Australia')[0],
+      selected: countries.filter((country) => country.name === 'Australia')[0],
       value: '',
-      suggestions: countries
+      suggestions: countries,
     };
   }
 
@@ -63,32 +63,32 @@ export default class ScrollableContainer extends Component {
     this.setState({
       isModalOpen: true,
       value: '',
-      suggestions: countries
+      suggestions: countries,
     });
   };
 
   closeModal = () => {
     this.setState({
-      isModalOpen: false
+      isModalOpen: false,
     });
   };
 
   onChange = (event, { newValue }) => {
     this.setState({
-      value: newValue
+      value: newValue,
     });
   };
 
   onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
-      suggestions: getSuggestions(value)
+      suggestions: getSuggestions(value),
     });
   };
 
   onSuggestionSelected = (event, { suggestion }) => {
     this.setState({
       isModalOpen: false,
-      selected: suggestion
+      selected: suggestion,
     });
   };
 
@@ -97,7 +97,7 @@ export default class ScrollableContainer extends Component {
     const inputProps = {
       placeholder: 'Type to filter',
       value,
-      onChange: this.onChange
+      onChange: this.onChange,
     };
 
     return (

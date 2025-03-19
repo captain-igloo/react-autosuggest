@@ -10,16 +10,16 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, 'demo', 'dist'),
-    filename: 'index.js'
+    filename: 'index.js',
   },
 
   optimization: {
+    minimize: true,
     minimizer: [
       new TerserPlugin({
-        cache: true,
-        parallel: true
-      })
-    ]
+        parallel: true,
+      }),
+    ],
   },
 
   module: {
@@ -29,8 +29,8 @@ module.exports = {
         loader: 'babel-loader',
         include: [
           path.join(__dirname, 'src'), // Must be an absolute path
-          path.join(__dirname, 'demo', 'src') // Must be an absolute path
-        ]
+          path.join(__dirname, 'demo', 'src'), // Must be an absolute path
+        ],
       },
       {
         test: /\.less$/,
@@ -40,51 +40,62 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: '[name]__[local]___[hash:base64:5]'
-              }
-            }
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+              },
+            },
           },
           {
             loader: 'postcss-loader',
             options: {
-              plugins: [autoprefixer()]
-            }
+              postcssOptions: {
+                plugins: [autoprefixer()],
+              },
+            },
           },
           {
             loader: 'less-loader',
             options: {
-              paths: [path.resolve(__dirname, 'demo', 'src')]
-            }
-          }
+              lessOptions: {
+                paths: [path.resolve(__dirname, 'demo', 'src')],
+              },
+            },
+          },
         ],
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.jpg$/,
-        loader: 'url-loader?limit=8192' // 8kb
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
       },
       {
         test: /\.svg$/,
         use: [
           'url-loader?limit=8192!', // 8kb
-          'svgo-loader'
-        ]
-      }
-    ]
+          'svgo-loader',
+        ],
+      },
+    ],
   },
 
   resolve: {
-    modules: ['node_modules', 'components', 'src']
+    modules: ['node_modules', 'components', 'src'],
   },
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'app.css'
+      filename: 'app.css',
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    })
-  ]
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+  ],
 };
